@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://props/wings.gd" type="Script" id=1]
+[ext_resource path="res://graphics/ancas_item.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 6.28521
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 7.67146, 6.9529 )
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "collected"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:transform/scale")
+tracks/0/interp = 1
+tracks/0/keys = { "cont":true, "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "values":[ Vector2( 0.5, 0.5 ), Vector2( 5, 5 ) ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/keys = { "cont":true, "times":FloatArray( 0, 0.3 ), "transitions":FloatArray( 1, 1 ), "values":[ 1.0, 0.0 ] }
+
+[node name="FrogLegs" type="RigidBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+type = "frog_legs"
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+visibility/visible = false
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+visibility/visible = false
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/collected = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+

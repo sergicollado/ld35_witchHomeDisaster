@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://tiles/tileset.res" type="TileSet" id=1]
+[ext_resource path="res://room.gd" type="Script" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 7.23198, 5.96389, 504.047, 7.37593, 504.047, 506.505, 7.85898, 507.24 )
+
+[node name="Room" type="TileMap"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 32, 32 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray(  )
+script/script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+
+visibility/visible = false
+build_mode = 0
+polygon = Vector2Array( 7.23198, 5.96389, 504.047, 7.37593, 504.047, 506.505, 7.85898, 507.24 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+z/z = -2
+polygon = Vector2Array( 0, 0, 512, 0, 512, 512, 0, 512 )
+uv = Vector2Array(  )
+color = Color( 0.0437927, 0.113793, 0.160156, 1 )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+
