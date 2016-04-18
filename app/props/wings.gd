@@ -13,7 +13,9 @@ func _ready():
 func _collected(body):
 	if body.get_name()!= "Witch" or collected:
 		return
-	global.recipe[type] -= 1
+	if global.recipe[type] > 0:
+		global.recipe[type] -= 1
+	sample.play("item_b")	
 	get_node("AnimationPlayer").play("collected")
 	yield(get_node("AnimationPlayer"), "finished")
 	queue_free()

@@ -1,6 +1,6 @@
 
 extends Node2D
-
+signal shuffled
 
 
 var room_size = config.ROOM_SIZE
@@ -11,9 +11,14 @@ var TILE_DOOR = config.TILE_DOOR
 var MAX_DOOR_SIZE = config.MAX_DOOR_SIZE
 var previus_doors = []
 onready var room_template = load("res://tiles/room.tscn")
+onready var olla = load("res://props/olla.tscn")
+var list_rand = []
 
 func _ready():
 	randomize()
+	var olla_room = Vector2(randi()% int(LEVEL_GRID.x) , randi()% int(LEVEL_GRID.y) )
+	print('olla')
+	print(olla_room) 
 	var count = 0
 	for v_cell in range(LEVEL_GRID.x):
 		previus_doors.append([])
@@ -33,22 +38,37 @@ func _ready():
 			var room = generate_room(Vector2(v_cell*room_size,h_cell*room_size), current_doors)
 			
 			room.room_number= count
+			if (v_cell == olla_room.x and h_cell == olla_room.y) or (v_cell == 0 and h_cell == 0):
+				room.add_child(olla.instance())
+			list_rand.append(count)
 			add_child(room)
 			count +=1
 			
 func shuffle():
-	randomize()
-	var list = get_children()
-	list.sort_custom(self,"_suffle_two_elements")
-
+	var lista = get_tree().get_nodes_in_group('rooms')
+	list_rand= shuff(list_rand)
+	
 	var count = 0
 	for v_cell in range(LEVEL_GRID.x):
 		for h_cell in range(LEVEL_GRID.y):
-			list[count].set_pos(Vector2(v_cell*room_size*TILE_SIZE,h_cell*room_size*TILE_SIZE))
+			lista[list_rand[count]].set_pos(Vector2(v_cell*room_size*TILE_SIZE,h_cell*room_size*TILE_SIZE))
 			count += 1
+	emit_signal("shuffled")
+
+func shuff(list):
+	randomize()
+	for i in range(list.size()):
+		swap(list, i, i+randi()% (list.size()-i))
+	return list
+
+func swap(list,pos_a,pos_b):
+	var t = list[pos_a]
+	list[pos_a]=list[pos_b]
+	list[pos_b]=t
+
 
 func _suffle_two_elements(a,b):
-	return randf()>0.5
+	return (randf() > 0.5)
 
 func _room_enter(body, area):
 	print(area.room_number)

@@ -34,9 +34,13 @@ func get_fire():
 	if status == STATUS_HUNTED:
 		return
 	status = STATUS_HUNTED
-	var wings = wings_packed.instance()
-	wings.set_pos(get_global_pos())
-	Globals.get("Level").add_child(wings)
+	sample.play('b')
+	
+	randomize()
+	if randf() > 0.5:
+		var wings = wings_packed.instance()
+		wings.set_pos(get_global_pos())
+		Globals.get("Level").add_child(wings)
 	get_node("AnimationPlayer").play("hunted")
 	yield(get_node("AnimationPlayer"),'finished')
 	queue_free()

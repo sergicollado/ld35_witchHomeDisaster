@@ -31,6 +31,7 @@ func get_fire():
 	if  status != STATUS_DEAD:
 		status = STATUS_DEAD
 		player.play("dead")
+		sample.play('b')
 		set_fixed_process(false)
 		set_process_input(true)
 		
@@ -40,6 +41,7 @@ func _input(ev):
 		shoot()
 
 func shoot():
+	sample.play('a_low')
 	var new_gun = gun.instance()
 	new_gun.dir = dir_shot
 	new_gun.set_pos(shoot_pos.get_global_pos())
@@ -82,3 +84,5 @@ func _fixed_process(delta):
 		speed = n.slide(speed)
 		move(motion)
 
+func complete_game():
+	get_tree().change_scene("res://success.scn")

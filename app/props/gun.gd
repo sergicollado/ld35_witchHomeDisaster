@@ -28,6 +28,7 @@ func _collision(body):
 	if body.has_method("get_fire"):
 		body.get_fire()
 	status= STATUS_COLLISION
+	sample.play("d")	
 	get_node("AnimationPlayer").play("collision")
 	yield(get_node("AnimationPlayer"), "finished")
 	queue_free()

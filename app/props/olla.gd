@@ -13,7 +13,7 @@ func any_near(body):
 		var level = Globals.get("Level")
 		player.play("cooking")
 		if level.is_recipe_complete():
-			level.complete_game()
+			get_tree().change_scene("res://success.scn")
 		else:
 			level.recipe_incomplete()
 			timer.start()
