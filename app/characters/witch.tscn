@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://characters/witch.gd" type="Script" id=1]
-[ext_resource path="res://graphics/witch.png" type="Texture" id=2]
+[ext_resource path="res://graphics/witch_rework.png" type="Texture" id=2]
 [ext_resource path="res://graphics/progress.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 radius = 10.4932
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 resource/name = "dead"
 length = 0.7
@@ -18,7 +18,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
-tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.2, 0.4, 0.6 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 5, 6, 7, 8 ] }
+tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.2, 0.4, 0.6 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 8, 9, 10, 11 ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Particles2D:config/emitting")
 tracks/1/interp = 1
@@ -28,16 +28,15 @@ tracks/2/path = NodePath("Sprite/TextureProgress:visibility/visible")
 tracks/2/interp = 1
 tracks/2/keys = { "cont":false, "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "values":[ false ] }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 
-resource/name = "idle"
-length = 0.5
+length = 1.5
 loop = true
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
-tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "values":[ 0, 0, 1, 2, 3 ] }
+tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 1.1, 1.2, 1.3, 1.4 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6 ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite/TextureProgress:visibility/visible")
 tracks/1/interp = 1
@@ -89,8 +88,8 @@ color/color = Color( 0.292909, 0.535156, 0.194412, 1 )
 [node name="Sprite" type="Sprite" parent="."]
 
 texture = ExtResource( 2 )
-hframes = 9
-frame = 5
+hframes = 12
+frame = 1
 
 [node name="TextureProgress" type="TextureProgress" parent="Sprite"]
 
@@ -127,8 +126,8 @@ _update_shape_index = 0
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/dead = SubResource( 3 )
-anims/idle = SubResource( 2 )
+anims/dead = SubResource( 2 )
+anims/idle = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

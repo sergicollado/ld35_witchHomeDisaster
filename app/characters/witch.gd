@@ -83,6 +83,3 @@ func _fixed_process(delta):
 		motion = n.slide(motion)
 		speed = n.slide(speed)
 		move(motion)
-
-func complete_game():
-	get_tree().change_scene("res://success.scn")
